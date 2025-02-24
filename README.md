@@ -1,4 +1,4 @@
-# Welcome to your Expo app 👋
+# Welcome 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
@@ -16,35 +16,60 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
     npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+## About
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+1. Description:
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+   ● It's a mobile scheduling application that allows users to create, manage, and repeat events.
 
-## Get a fresh project
+2. Functionality:
 
-When you're ready, run:
+   ● Users can manage events on specific dates by clicking on the calendar.
 
-```bash
-npm run reset-project
-```
+   ● Available actions:
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+   - Create a new event – Enter an event name, set a time, and choose a repeat
+     option.
 
-## Learn more
+   - Edit an existing event – Modify the name, repeat option, or time of an existing
+     event.
 
-To learn more about developing your project with Expo, look at the following resources:
+   - Delete an event – Remove an event by clicking the delete button.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+   ● Repeat options:
 
-## Join the community
+   - ⚠️(not implemented yet) Weekly – The event recurs every week.
 
-Join our community of developers creating universal apps.
+   - ⚠️(not implemented yet) Bi-weekly – The event recurs every other week.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+   - Monthly – The event recurs every month.
+
+   ● Users must click the “Save” button to confirm event creation.
+
+   ● Events and selected day are stored locally so that past data is retained when the app is restarted.
+
+   ● Dates with scheduled events are highlighted with red dots.
+
+3. Users are not able to:
+
+   ● Create or manage events in the past (but they can view past events). "Edit" button is disabled.
+
+   ● ⚠️(not implemented yet) Create overlapping events (events that have conflicting time slots).
+
+4. Requirements:
+
+   ● Tech stack:
+
+   - React Native (Expo)
+
+   - Redux-Toolkit
+
+   - My own calendar
+
+   - React Hook Form
+
+   - Day.js
+
+   - react-native-mask-text
+
+   - react-native-toast-message
