@@ -73,3 +73,5 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    - react-native-mask-text
 
    - react-native-toast-message
+
+   ● The application is tested across two Expo-supported platforms: Android and Web.
