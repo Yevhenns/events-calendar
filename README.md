@@ -86,4 +86,4 @@ Web verion:
 
 Android version:
 
-![alt text](image-1.png)
+![image](https://github.com/user-attachments/assets/16f8cb23-6582-48a2-afee-a0b5d2b94cbf)
