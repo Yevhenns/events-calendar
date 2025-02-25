@@ -40,7 +40,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
    - Weekly – The event recurs every week.
 
-   - ⚠️(not implemented yet) Bi-weekly – The event recurs every other week.
+   - Bi-weekly – The event recurs every other week.
 
    - Monthly – The event recurs every month.
 

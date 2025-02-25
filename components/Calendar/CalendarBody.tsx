@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { getAllEvents, setSelectedDay } from "@/store/events/eventsSlice";
 
 interface CalendarBodyBody {
-  finalDaysArray?: CalendarMonth;
+  finalDaysArray: CalendarMonth | undefined;
   clearCurrentEvent: () => void;
   hideForm: () => void;
 }
@@ -39,6 +39,7 @@ export function CalendarBody({
                     index={index}
                     allEvents={allEvents}
                     hideForm={hideForm}
+                    finalDaysArray={finalDaysArray}
                   />
                 );
               })}

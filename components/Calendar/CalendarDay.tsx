@@ -4,6 +4,10 @@ import { useAppSelector } from "@/store/hooks";
 import dayjs from "dayjs";
 
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import weekOfYear from "dayjs/plugin/weekOfYear";
+import { isBeWeekly } from "@/helpers/isBiWeekly";
+
+dayjs.extend(weekOfYear);
 
 interface DayWrapperProps {
   index: number;
@@ -11,6 +15,7 @@ interface DayWrapperProps {
   setUpSelectedDay: (dayItem: CalendarDay) => void;
   allEvents: Event[];
   hideForm: () => void;
+  finalDaysArray: CalendarMonth | undefined;
 }
 
 type StylesProps = {
@@ -26,9 +31,9 @@ export function CalendarDay({
   setUpSelectedDay,
   allEvents,
   hideForm,
+  finalDaysArray,
 }: DayWrapperProps) {
   const { type, id } = dayItem;
-
   const selectedDay = useAppSelector(getSelectedDay);
 
   const SATURDAY = 6;
@@ -53,6 +58,14 @@ export function CalendarDay({
       new Date(id) >= new Date(startDate)
   );
 
+  const hasRepeatedEventBiWeekly = allEvents.some(
+    ({ startDate, repeat }) =>
+      new Date(startDate).getDay() === new Date(id).getDay() &&
+      repeat === "Bi-weekly" &&
+      new Date(id) >= new Date(startDate) &&
+      isBeWeekly({ id, startDate, finalDaysArray })
+  );
+
   const styles = dayWrapper({ type, isDayToday, isWeekend, isSelctedDay });
 
   const onPress = () => {
@@ -63,9 +76,10 @@ export function CalendarDay({
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
       <Text>{dayItem.day}</Text>
-      {(hasEvent || hasRepeatedEventMonthly || hasRepeatedEventWeekly) && (
-        <View style={styles.dot} />
-      )}
+      {(hasEvent ||
+        hasRepeatedEventMonthly ||
+        hasRepeatedEventWeekly ||
+        hasRepeatedEventBiWeekly) && <View style={styles.dot} />}
     </TouchableOpacity>
   );
 }
