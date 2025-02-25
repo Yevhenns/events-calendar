@@ -14,7 +14,6 @@ interface DayWrapperProps {
   dayItem: CalendarDay;
   setUpSelectedDay: (dayItem: CalendarDay) => void;
   allEvents: Event[];
-  hideForm: () => void;
 }
 
 type StylesProps = {
@@ -29,9 +28,9 @@ export function CalendarDay({
   dayItem,
   setUpSelectedDay,
   allEvents,
-  hideForm,
 }: DayWrapperProps) {
   const { type, id } = dayItem;
+
   const selectedDay = useAppSelector(getSelectedDay);
 
   const SATURDAY = 6;
@@ -68,7 +67,6 @@ export function CalendarDay({
 
   const onPress = () => {
     setUpSelectedDay(dayItem);
-    hideForm();
   };
 
   return (

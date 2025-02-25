@@ -22,6 +22,7 @@ export function CalendarBody({
   const setUpSelectedDay = (dayItem: CalendarDay) => {
     dispatch(setSelectedDay(dayItem));
     clearCurrentEvent();
+    hideForm();
   };
 
   return (
@@ -38,7 +39,6 @@ export function CalendarBody({
                     dayItem={dayItem}
                     index={index}
                     allEvents={allEvents}
-                    hideForm={hideForm}
                   />
                 );
               })}

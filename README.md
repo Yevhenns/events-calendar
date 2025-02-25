@@ -74,4 +74,4 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
    - react-native-toast-message
 
-   ● The application is tested across two Expo-supported platforms: Android and Web. As long as I don't have IOS environment.
+   ● The application is tested across two Expo-supported platforms: Android and Web. As long as I don't have IOS environment yet.
