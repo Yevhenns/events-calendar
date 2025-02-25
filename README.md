@@ -81,6 +81,9 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    ● The application could be improved with adding validation library (zod for instance) and adding color schemas.
 
 Web verion:
+
 ![alt text](image.png)
+
 Android version:
+
 ![alt text](image-1.png)
