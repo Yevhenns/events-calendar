@@ -82,7 +82,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 Web verion:
 
-![alt text](image.png)
+![image](https://github.com/user-attachments/assets/3c94a24d-1744-4f61-a804-af20ef765d13)
 
 Android version:
 
