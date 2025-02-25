@@ -39,7 +39,6 @@ export function CalendarBody({
                     index={index}
                     allEvents={allEvents}
                     hideForm={hideForm}
-                    finalDaysArray={finalDaysArray}
                   />
                 );
               })}

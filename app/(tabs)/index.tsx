@@ -7,20 +7,11 @@ import { EventsList } from "@/components/EventsList/EventsList";
 import { useAppSelector } from "@/store/hooks";
 import { getAllEvents, getSelectedDay } from "@/store/events/eventsSlice";
 import { useState } from "react";
-import { useCalendar } from "@/hooks/useCalendar";
 import { isBeWeekly } from "@/helpers/isBiWeekly";
 
 export default function HomeScreen() {
   const [editingEvent, setEditingEvent] = useState<null | Event>(null);
   const [isFormShown, setIsFormShown] = useState(false);
-
-  const {
-    finalDaysArray,
-    currentMonthName,
-    year,
-    incrementMonth,
-    decrementMonth,
-  } = useCalendar();
 
   const selectedDay = useAppSelector(getSelectedDay);
   const allEvents = useAppSelector(getAllEvents);
@@ -71,7 +62,7 @@ export default function HomeScreen() {
         new Date(startDate).getDay() === new Date(selectedDay.id).getDay() &&
         repeat === "Bi-weekly" &&
         new Date(selectedDay.id) > new Date(startDate) &&
-        isBeWeekly({ id: selectedDay.id, startDate, finalDaysArray })
+        isBeWeekly({ id: selectedDay.id, startDate })
     );
 
   const showEventsListConditions =
@@ -82,15 +73,7 @@ export default function HomeScreen() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Calendar
-        clearCurrentEvent={clearCurrentEvent}
-        hideForm={hideForm}
-        currentMonthName={currentMonthName}
-        year={year}
-        incrementMonth={incrementMonth}
-        decrementMonth={decrementMonth}
-        finalDaysArray={finalDaysArray}
-      />
+      <Calendar clearCurrentEvent={clearCurrentEvent} hideForm={hideForm} />
       {showEventsListConditions && (
         <EventsList
           todayEvents={todayEvents}

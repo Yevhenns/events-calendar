@@ -15,7 +15,6 @@ interface DayWrapperProps {
   setUpSelectedDay: (dayItem: CalendarDay) => void;
   allEvents: Event[];
   hideForm: () => void;
-  finalDaysArray: CalendarMonth | undefined;
 }
 
 type StylesProps = {
@@ -31,7 +30,6 @@ export function CalendarDay({
   setUpSelectedDay,
   allEvents,
   hideForm,
-  finalDaysArray,
 }: DayWrapperProps) {
   const { type, id } = dayItem;
   const selectedDay = useAppSelector(getSelectedDay);
@@ -63,7 +61,7 @@ export function CalendarDay({
       new Date(startDate).getDay() === new Date(id).getDay() &&
       repeat === "Bi-weekly" &&
       new Date(id) >= new Date(startDate) &&
-      isBeWeekly({ id, startDate, finalDaysArray })
+      isBeWeekly({ id, startDate })
   );
 
   const styles = dayWrapper({ type, isDayToday, isWeekend, isSelctedDay });

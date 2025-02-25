@@ -4,26 +4,22 @@ import { CalendarNavigation } from "./CalendarNavigation";
 import { CalendarBody } from "./CalendarBody";
 
 import { StyleSheet, View } from "react-native";
+import { useCalendar } from "@/hooks/useCalendar";
 
 interface CalendarProps {
   clearCurrentEvent: () => void;
   hideForm: () => void;
-  currentMonthName: string;
-  year: number;
-  incrementMonth: () => void;
-  decrementMonth: () => void;
-  finalDaysArray: CalendarMonth | undefined;
 }
 
-export function Calendar({
-  clearCurrentEvent,
-  hideForm,
-  currentMonthName,
-  year,
-  incrementMonth,
-  decrementMonth,
-  finalDaysArray,
-}: CalendarProps) {
+export function Calendar({ clearCurrentEvent, hideForm }: CalendarProps) {
+  const {
+    finalDaysArray,
+    currentMonthName,
+    year,
+    incrementMonth,
+    decrementMonth,
+  } = useCalendar();
+
   return (
     <View style={styles.calendar}>
       <CalendarNavigation

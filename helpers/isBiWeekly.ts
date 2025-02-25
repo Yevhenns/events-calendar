@@ -1,40 +1,33 @@
 /* eslint-disable no-undef */
 import dayjs from "dayjs";
 import weekOfYear from "dayjs/plugin/weekOfYear";
+import isoWeeksInYear from "dayjs/plugin/isoWeeksInYear";
+import isLeapYear from "dayjs/plugin/isLeapYear";
 
 dayjs.extend(weekOfYear);
+dayjs.extend(isoWeeksInYear);
+dayjs.extend(isLeapYear);
 
 export const isBeWeekly = ({
   startDate,
-  finalDaysArray,
   id,
 }: {
   startDate: string;
-  finalDaysArray?: CalendarMonth;
   id: string;
 }) => {
-  const getLastWeek = () => {
-    if (finalDaysArray) {
-      const finalArray = finalDaysArray[finalDaysArray.length - 1];
+  const start = dayjs(startDate).week();
+  const originalStart = start;
+  const end1 = dayjs(id).isoWeeksInYear();
 
-      return finalArray.length === 0
-        ? finalDaysArray[finalDaysArray.length - 2]
-        : finalArray;
-    }
-  };
+  const weeksFromStart = [];
 
-  const lastWeek = getLastWeek();
-
-  if (lastWeek) {
-    const start = dayjs(startDate).week();
-
-    const end = dayjs(lastWeek[0].id).week();
-
-    const weeksFromStart = [];
-    for (let i = start; i <= end; i += 2) {
-      weeksFromStart.push(i);
-    }
-
-    return weeksFromStart.some((item) => item === dayjs(id).week());
+  for (let i = originalStart; i >= 1; i -= 2) {
+    weeksFromStart.unshift(i);
   }
+
+  for (let i = start + 2; i <= end1; i += 2) {
+    weeksFromStart.push(i);
+  }
+
+  return weeksFromStart.some((item) => item === dayjs(id).week());
 };

@@ -36,7 +36,7 @@ export function EventsList({
       )}
       {todayRepeatedEventsMonthly && todayRepeatedEventsMonthly.length > 0 && (
         <View style={styles.list}>
-          <Text style={styles.title}>Repeated events list</Text>
+          <Text style={styles.title}>Repeated monthly</Text>
           {todayRepeatedEventsMonthly.map((event) => (
             <EventsListItem
               event={event}
@@ -49,7 +49,7 @@ export function EventsList({
       )}
       {todayRepeatedEventsWeekly && todayRepeatedEventsWeekly.length > 0 && (
         <View style={styles.list}>
-          <Text style={styles.title}>Repeated events list</Text>
+          <Text style={styles.title}>Repeated weekly</Text>
           {todayRepeatedEventsWeekly.map((event) => (
             <EventsListItem
               event={event}
@@ -63,7 +63,7 @@ export function EventsList({
       {todayRepeatedEventsBiWeekly &&
         todayRepeatedEventsBiWeekly.length > 0 && (
           <View style={styles.list}>
-            <Text style={styles.title}>Repeated events list</Text>
+            <Text style={styles.title}>Repeated bi-weekly</Text>
             {todayRepeatedEventsBiWeekly.map((event) => (
               <EventsListItem
                 event={event}
