@@ -46,16 +46,26 @@ export function CalendarDay({
       new Date(id) >= new Date(startDate)
   );
 
+  const hasRepeatedEventWeekly = allEvents.some(
+    ({ startDate, repeat }) =>
+      new Date(startDate).getDay() === new Date(id).getDay() &&
+      repeat === "Weekly" &&
+      new Date(id) >= new Date(startDate)
+  );
+
   const styles = dayWrapper({ type, isDayToday, isWeekend, isSelctedDay });
 
   const onPress = () => {
     setUpSelectedDay(dayItem);
     hideForm();
   };
+
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
       <Text>{dayItem.day}</Text>
-      {(hasEvent || hasRepeatedEventMonthly) && <View style={styles.dot} />}
+      {(hasEvent || hasRepeatedEventMonthly || hasRepeatedEventWeekly) && (
+        <View style={styles.dot} />
+      )}
     </TouchableOpacity>
   );
 }

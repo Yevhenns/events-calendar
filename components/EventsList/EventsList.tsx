@@ -5,6 +5,7 @@ import { EventsListItem } from "./EventsListItem";
 interface EventsListProps {
   todayEvents: Event[];
   todayRepeatedEventsMonthly: Event[] | null;
+  todayRepeatedEventsWeekly: Event[] | null;
   setCurrentEvent: (editingId: string) => void;
   showForm: () => void;
 }
@@ -12,6 +13,7 @@ interface EventsListProps {
 export function EventsList({
   todayEvents,
   todayRepeatedEventsMonthly,
+  todayRepeatedEventsWeekly,
   setCurrentEvent,
   showForm,
 }: EventsListProps) {
@@ -34,6 +36,19 @@ export function EventsList({
         <View style={styles.list}>
           <Text style={styles.title}>Repeated events list</Text>
           {todayRepeatedEventsMonthly.map((event) => (
+            <EventsListItem
+              event={event}
+              key={event.id}
+              setCurrentEvent={setCurrentEvent}
+              showForm={showForm}
+            />
+          ))}
+        </View>
+      )}
+      {todayRepeatedEventsWeekly && todayRepeatedEventsWeekly.length > 0 && (
+        <View style={styles.list}>
+          <Text style={styles.title}>Repeated events list</Text>
+          {todayRepeatedEventsWeekly.map((event) => (
             <EventsListItem
               event={event}
               key={event.id}

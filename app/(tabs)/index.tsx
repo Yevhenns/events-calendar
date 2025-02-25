@@ -19,15 +19,6 @@ export default function HomeScreen() {
     ({ startDate }) => startDate === selectedDay?.id
   );
 
-  const todayRepeatedEventsMonthly =
-    selectedDay &&
-    allEvents.filter(
-      ({ startDate, repeat }) =>
-        new Date(startDate).getDate() === new Date(selectedDay.id).getDate() &&
-        repeat === "Monthly" &&
-        new Date(selectedDay.id) > new Date(startDate)
-    );
-
   const setCurrentEvent = (editingId: string) => {
     const currentEvent = allEvents.find(({ id }) => id === editingId);
     currentEvent && setEditingEvent(currentEvent);
@@ -45,15 +36,37 @@ export default function HomeScreen() {
     setIsFormShown(false);
   };
 
+  const todayRepeatedEventsMonthly =
+    selectedDay &&
+    allEvents.filter(
+      ({ startDate, repeat }) =>
+        new Date(startDate).getDate() === new Date(selectedDay.id).getDate() &&
+        repeat === "Monthly" &&
+        new Date(selectedDay.id) > new Date(startDate)
+    );
+
+  const todayRepeatedEventsWeekly =
+    selectedDay &&
+    allEvents.filter(
+      ({ startDate, repeat }) =>
+        new Date(startDate).getDay() === new Date(selectedDay.id).getDay() &&
+        repeat === "Weekly" &&
+        new Date(selectedDay.id) > new Date(startDate)
+    );
+
+  const showEventsListConditions =
+    todayEvents.length > 0 ||
+    (todayRepeatedEventsMonthly && todayRepeatedEventsMonthly?.length > 0) ||
+    (todayRepeatedEventsWeekly && todayRepeatedEventsWeekly.length > 0);
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Calendar clearCurrentEvent={clearCurrentEvent} hideForm={hideForm} />
-      {(todayEvents.length > 0 ||
-        (todayRepeatedEventsMonthly &&
-          todayRepeatedEventsMonthly?.length > 0)) && (
+      {showEventsListConditions && (
         <EventsList
           todayEvents={todayEvents}
           todayRepeatedEventsMonthly={todayRepeatedEventsMonthly}
+          todayRepeatedEventsWeekly={todayRepeatedEventsWeekly}
           setCurrentEvent={setCurrentEvent}
           showForm={showForm}
         />
