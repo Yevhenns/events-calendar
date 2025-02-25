@@ -14,14 +14,6 @@ export const isValidDate = (value: string) => {
     return false;
   }
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  date.setHours(0, 0, 0, 0);
-
-  if (date < today) {
-    return false;
-  }
-
   return true;
 };
 

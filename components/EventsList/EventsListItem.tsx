@@ -38,7 +38,7 @@ export function EventsListItem({
 
   return (
     <View style={styles.item} key={id}>
-      <View>
+      <View style={styles.textWrapper}>
         <Text>Event name: {eventName}</Text>
         <Text>
           Starts: {startDate}, {startTime}
@@ -71,6 +71,12 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    width: "100%",
+  },
+
+  textWrapper: {
+    flex: 1,
+    width: "auto",
   },
 
   buttonsWrapper: {

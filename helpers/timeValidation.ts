@@ -1,5 +1,5 @@
 export const isValidTime = (value: string) => {
-  if (!/^\d{2}:\d{2}$/.test(value)) return false;
+  if (value.length !== 5) return false;
 
   const [hour, minute] = value.split(":").map(Number);
 

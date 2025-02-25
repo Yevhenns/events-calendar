@@ -49,6 +49,19 @@ export function DateTimeInputs({
       startDate: dayjs(new Date()).format("YYYY-MM-DD"),
       endDate: startDateValue,
     });
+    if (currentDateDifference < 0 && startDateValue.length === 10) {
+      setError("startDate", {
+        type: "manual",
+        message: "Cannot be in past",
+      });
+    }
+  }, [setError, startDateValue]);
+
+  useEffect(() => {
+    const currentDateDifference = getDateDifference({
+      startDate: dayjs(new Date()).format("YYYY-MM-DD"),
+      endDate: startDateValue,
+    });
 
     if (
       currentDateDifference === 0 &&
@@ -60,39 +73,17 @@ export function DateTimeInputs({
           type: "manual",
           message: "Cannot be in past",
         });
-      } else {
-        clearErrors("startTime");
-      }
-    } else {
-      clearErrors("startTime");
-    }
-  }, [
-    clearErrors,
-    dateDifference,
-    endTimeValue,
-    setError,
-    startDateValue,
-    startTimeValue,
-  ]);
-
-  useEffect(() => {
-    if (startDateValue && endDateValue) {
-      if (dateDifference > 0) {
-        clearErrors("endTime");
-      }
-      if (dateDifference < 0) {
-        setError("endDate", {
-          type: "manual",
-          message: "Cannot be before start",
-        });
-      } else {
-        clearErrors("endDate");
       }
     }
-  }, [clearErrors, dateDifference, endDateValue, setError, startDateValue]);
+  }, [setError, startDateValue, startTimeValue]);
 
   useEffect(() => {
-    if (dateDifference === 0 && startTimeValue && endTimeValue) {
+    if (
+      dateDifference === 0 &&
+      startTimeValue &&
+      endTimeValue &&
+      endTimeValue.length === 5
+    ) {
       const timeDifference = isEndTimeAfterStart({
         endTime: endTimeValue,
         startTime: startTimeValue,
@@ -107,6 +98,20 @@ export function DateTimeInputs({
       }
     }
   }, [clearErrors, dateDifference, endTimeValue, setError, startTimeValue]);
+
+  useEffect(() => {
+    if (startDateValue && endDateValue) {
+      if (dateDifference > 0) {
+        clearErrors("endTime");
+      }
+      if (dateDifference < 0 && endDateValue.length === 10) {
+        setError("endDate", {
+          type: "manual",
+          message: "Cannot be before start",
+        });
+      }
+    }
+  }, [clearErrors, dateDifference, endDateValue, setError, startDateValue]);
 
   return (
     <View style={styles.layout}>
