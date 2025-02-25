@@ -11,8 +11,8 @@ import {
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { DateTimeInputs } from "./DateTimeInputs";
-import { useAppDispatch } from "@/store/hooks";
-import { addEvent, editEvent } from "@/store/events/eventsSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { addEvent, editEvent, getAllEvents } from "@/store/events/eventsSlice";
 import uuid from "react-native-uuid";
 import Toast from "react-native-toast-message";
 
@@ -39,8 +39,27 @@ export function EventForm({
     clearErrors,
     formState: { errors, isValid },
   } = useForm<EventDto>({ mode: "onChange" });
+  console.log(new Date() > new Date("2025-02-26"));
+
+  const allEvents = useAppSelector(getAllEvents);
 
   const onSubmit: SubmitHandler<EventDto> = (data) => {
+    const start = new Date(data.startDate);
+    const end = new Date(data.endDate);
+
+    const isNewEventCollapsesExisting = allEvents.some(
+      ({ startDate, endDate }) =>
+        (start > new Date(startDate) && start < new Date(endDate)) ||
+        (start > new Date(startDate) && end < new Date(endDate))
+    );
+
+    if (isNewEventCollapsesExisting) {
+      return Toast.show({
+        type: "error",
+        text1: "Collapse",
+      });
+    }
+
     if (editingEvent) {
       dispatch(editEvent({ event: data, id: editingEvent.id }));
       clearCurrentEvent();

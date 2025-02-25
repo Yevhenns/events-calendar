@@ -54,7 +54,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
    ● Create or manage events in the past (but they can view past events). "Edit" button is disabled.
 
-   ● ⚠️(not implemented yet) Create overlapping events (events that have conflicting time slots).
+   ● ⚠️(partially implemented) Create overlapping events (events that have conflicting time slots).
 
 4. Requirements:
 
