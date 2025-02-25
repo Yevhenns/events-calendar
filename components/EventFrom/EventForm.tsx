@@ -148,18 +148,20 @@ export function EventForm({
         render={() => (
           <View style={styles.pickerContainer}>
             <Text style={styles.label}>Repeat</Text>
-            <Picker
-              id="repeat"
-              style={styles.picker}
-              selectedValue={selectedRepeat}
-              onValueChange={(itemValue: Repeat) =>
-                setValue("repeat", itemValue)
-              }
-            >
-              {repeat.map(({ label, value }) => (
-                <Picker.Item key={value} label={label} value={value} />
-              ))}
-            </Picker>
+            <View style={styles.pickerWrapper}>
+              <Picker
+                id="repeat"
+                style={styles.picker}
+                selectedValue={selectedRepeat}
+                onValueChange={(itemValue: Repeat) =>
+                  setValue("repeat", itemValue)
+                }
+              >
+                {repeat.map(({ label, value }) => (
+                  <Picker.Item key={value} label={label} value={value} />
+                ))}
+              </Picker>
+            </View>
           </View>
         )}
       />
@@ -192,11 +194,17 @@ export const styles = StyleSheet.create({
     gap: 5,
   },
 
-  picker: {
-    padding: 12,
-    borderRadius: 5,
+  pickerWrapper: {
     borderColor: "black",
     borderWidth: 1,
+    borderRadius: 5,
+    overflow: "hidden",
+  },
+
+  picker: {
+    padding: 8,
+    backgroundColor: "white",
+    borderRadius: 5,
   },
 
   button: {
